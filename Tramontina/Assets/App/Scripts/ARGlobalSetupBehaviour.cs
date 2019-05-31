@@ -27,6 +27,10 @@ namespace Sample
 {
     public class ARGlobalSetupBehaviour : MonoBehaviour
     {
+        public Sprite[] m_premios;
+        public Sprite[] m_Sprite;
+        Sprite image, premio;
+        public GameObject[] centros;
         public GameObject roulette;
         public GameObject Target;
         public GameObject ContainerTarget;
@@ -38,7 +42,6 @@ namespace Sample
         float timeRotation = 5f;
         float timeRotationmax = 10f;
         float timeRotationmin = 7f;
-
 
         bool detected = false;
         float timer = 0;
@@ -73,7 +76,6 @@ namespace Sample
 
         void Start()
         {
-            messageImage.GetComponent<Image>().color = Color.black;
             messageImage.SetActive(true);
             activityImage.SetActive(false);
             playButton.onClick.AddListener(Rot);
@@ -131,22 +133,73 @@ namespace Sample
                 {
                     rotate = false;
                     rouletteSound.Stop();
-                    Color col=Color.blue;
-                    if (((roulette.transform.localEulerAngles.y>=0)&& (roulette.transform.localEulerAngles.y < 40))||(roulette.transform.localEulerAngles.y == 40)) col= Color.magenta;
-                    if ((roulette.transform.localEulerAngles.y>=40)&& (roulette.transform.localEulerAngles.y < 80)) col = Color.blue;
-                    if ((roulette.transform.localEulerAngles.y >= 80) && (roulette.transform.localEulerAngles.y < 120)) col = Color.black;
-                    if ((roulette.transform.localEulerAngles.y >= 120) && (roulette.transform.localEulerAngles.y < 160)) col = Color.cyan; 
-                    if ((roulette.transform.localEulerAngles.y >= 160) && (roulette.transform.localEulerAngles.y < 200)) col = Color.gray;
-                    if ((roulette.transform.localEulerAngles.y >= 200) && (roulette.transform.localEulerAngles.y < 240)) col = Color.green;
-                    if ((roulette.transform.localEulerAngles.y >= 240) && (roulette.transform.localEulerAngles.y < 280)) col = Color.red;
-                    if ((roulette.transform.localEulerAngles.y >= 280) && (roulette.transform.localEulerAngles.y < 320)) col = Color.yellow;
-                    if ((roulette.transform.localEulerAngles.y >= 320) && (roulette.transform.localEulerAngles.y < 360)) col = Color.white;
-                    messageImage.GetComponent<Image>().color = col;
-                    activityImage.GetComponent<Image>().color = col;
+                    
+
+                    foreach (GameObject centro in centros)
+                    {
+                        centro.SetActive(false);
+                    }
+
+                    if (((roulette.transform.localEulerAngles.y >= 0) && (roulette.transform.localEulerAngles.y < 40)) || (roulette.transform.localEulerAngles.y == 40))
+                    {
+                        centros[9].SetActive(true);
+                        image = m_Sprite[9];
+                        premio = m_premios[9];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= 40) && (roulette.transform.localEulerAngles.y < 80))
+                    {
+                        centros[8].SetActive(true);
+                        image = m_Sprite[8];
+                        premio = m_premios[8];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= 80) && (roulette.transform.localEulerAngles.y < 120))
+                    {
+                        centros[7].SetActive(true);
+                        image = m_Sprite[7];
+                        premio = m_premios[7];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= 120) && (roulette.transform.localEulerAngles.y < 160))
+                    {
+
+                        centros[6].SetActive(true);
+                        image = m_Sprite[6];
+                        premio = m_premios[6];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= 160) && (roulette.transform.localEulerAngles.y < 200))
+                    {
+                        centros[5].SetActive(true);
+                        image = m_Sprite[5];
+                        premio = m_premios[5];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= 200) && (roulette.transform.localEulerAngles.y < 240))
+                    {
+                        centros[4].SetActive(true);
+                        image = m_Sprite[4];
+                        premio = m_premios[4];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= 240) && (roulette.transform.localEulerAngles.y < 280))
+                    {
+                        centros[3].SetActive(true);
+                        image = m_Sprite[3];
+                        premio = m_premios[3];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= 280) && (roulette.transform.localEulerAngles.y < 320))
+                    {
+                        centros[2].SetActive(true);
+                        image = m_Sprite[2];
+                        premio = m_premios[2];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= 320) && (roulette.transform.localEulerAngles.y < 360))
+                    {
+                        centros[1].SetActive(true);
+                        image = m_Sprite[1];
+                        premio = m_premios[1];
+                    }
+                    messageImage.GetComponent<Image>().overrideSprite = image;
+                    activityImage.GetComponent<Image>().overrideSprite = premio;
                     seeActivityImage = true;
                 }
             }
-
 
         }
         //=============================================================================================================================
@@ -156,6 +209,10 @@ namespace Sample
         {
             if (Target.activeSelf == true)
             {
+                messageImage.GetComponent<Image>().overrideSprite = m_Sprite[0];
+                activityImage.GetComponent<Image>().overrideSprite = m_premios[0];
+
+                centros[0].SetActive(true);
                 rouletteSound.volume = 1f;
                 rouletteSound.Stop();
                 rouletteSound.Play();
