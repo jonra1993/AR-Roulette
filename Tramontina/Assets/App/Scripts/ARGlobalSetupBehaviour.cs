@@ -37,6 +37,7 @@ namespace Sample
         public GameObject activityImage;
         public GameObject messageImage;
         public AudioSource rouletteSound;
+        public AudioSource winSound;
         public Button playButton;
         public float timeActiveOnTargetLose = .1f;
         float timeRotation = 5f;
@@ -133,67 +134,69 @@ namespace Sample
                 {
                     rotate = false;
                     rouletteSound.Stop();
-                    
+                    winSound.Play();
 
                     foreach (GameObject centro in centros)
                     {
                         centro.SetActive(false);
                     }
 
-                    if (((roulette.transform.localEulerAngles.y >= 0) && (roulette.transform.localEulerAngles.y < 40)) || (roulette.transform.localEulerAngles.y == 40))
-                    {
-                        centros[9].SetActive(true);
-                        image = m_Sprite[9];
-                        premio = m_premios[9];
-                    }
-                    if ((roulette.transform.localEulerAngles.y >= 40) && (roulette.transform.localEulerAngles.y < 80))
-                    {
-                        centros[8].SetActive(true);
-                        image = m_Sprite[8];
-                        premio = m_premios[8];
-                    }
-                    if ((roulette.transform.localEulerAngles.y >= 80) && (roulette.transform.localEulerAngles.y < 120))
-                    {
-                        centros[7].SetActive(true);
-                        image = m_Sprite[7];
-                        premio = m_premios[7];
-                    }
-                    if ((roulette.transform.localEulerAngles.y >= 120) && (roulette.transform.localEulerAngles.y < 160))
-                    {
+                    int space = 20;
 
-                        centros[6].SetActive(true);
-                        image = m_Sprite[6];
-                        premio = m_premios[6];
-                    }
-                    if ((roulette.transform.localEulerAngles.y >= 160) && (roulette.transform.localEulerAngles.y < 200))
+                    if ((roulette.transform.localEulerAngles.y >= 360-space) && (roulette.transform.localEulerAngles.y < 0+space))
                     {
-                        centros[5].SetActive(true);
-                        image = m_Sprite[5];
-                        premio = m_premios[5];
+                        centros[1].SetActive(true);
+                        image = m_Sprite[1];
+                        premio = m_premios[1];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= 200) && (roulette.transform.localEulerAngles.y < 240))
-                    {
-                        centros[4].SetActive(true);
-                        image = m_Sprite[4];
-                        premio = m_premios[4];
-                    }
-                    if ((roulette.transform.localEulerAngles.y >= 240) && (roulette.transform.localEulerAngles.y < 280))
-                    {
-                        centros[3].SetActive(true);
-                        image = m_Sprite[3];
-                        premio = m_premios[3];
-                    }
-                    if ((roulette.transform.localEulerAngles.y >= 280) && (roulette.transform.localEulerAngles.y < 320))
+                    if ((roulette.transform.localEulerAngles.y >= space) && (roulette.transform.localEulerAngles.y < space+40))
                     {
                         centros[2].SetActive(true);
                         image = m_Sprite[2];
                         premio = m_premios[2];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= 320) && (roulette.transform.localEulerAngles.y < 360))
+                    if ((roulette.transform.localEulerAngles.y >= space + 40) && (roulette.transform.localEulerAngles.y < space + 40*2))
                     {
-                        centros[1].SetActive(true);
-                        image = m_Sprite[1];
-                        premio = m_premios[1];
+                        centros[3].SetActive(true);
+                        image = m_Sprite[3];
+                        premio = m_premios[3];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 2) && (roulette.transform.localEulerAngles.y < space + 40 * 3))
+                    {
+
+                        centros[4].SetActive(true);
+                        image = m_Sprite[4];
+                        premio = m_premios[4];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 3) && (roulette.transform.localEulerAngles.y < space + 40 * 4))
+                    {
+                        centros[5].SetActive(true);
+                        image = m_Sprite[5];
+                        premio = m_premios[5];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 4) && (roulette.transform.localEulerAngles.y < space + 40 * 5))
+                    {
+                        centros[6].SetActive(true);
+                        image = m_Sprite[6];
+                        premio = m_premios[6];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 5) && (roulette.transform.localEulerAngles.y < space + 40 * 6))
+                    {
+                        centros[7].SetActive(true);
+                        image = m_Sprite[7];
+                        premio = m_premios[7];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 6) && (roulette.transform.localEulerAngles.y < space + 40 * 7))
+                    {
+                        centros[8].SetActive(true);
+                        image = m_Sprite[8];
+                        premio = m_premios[8];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 7) && (roulette.transform.localEulerAngles.y < space + 40 * 8))
+                    {
+                        centros[9].SetActive(true);
+                        image = m_Sprite[9];
+                        premio = m_premios[9];
                     }
                     messageImage.GetComponent<Image>().overrideSprite = image;
                     activityImage.GetComponent<Image>().overrideSprite = premio;
