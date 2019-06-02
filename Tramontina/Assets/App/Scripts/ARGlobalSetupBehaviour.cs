@@ -143,7 +143,7 @@ namespace Sample
 
                     int space = 20;
 
-                    if ((roulette.transform.localEulerAngles.y >= 360-space) && (roulette.transform.localEulerAngles.y < 0+space))
+                    if ((roulette.transform.localEulerAngles.y >= 0) && (roulette.transform.localEulerAngles.y < 0+space))
                     {
                         centros[1].SetActive(true);
                         image = m_Sprite[1];
@@ -155,13 +155,13 @@ namespace Sample
                         image = m_Sprite[2];
                         premio = m_premios[2];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= space + 40) && (roulette.transform.localEulerAngles.y < space + 40*2))
+                    if ((roulette.transform.localEulerAngles.y >= space + 40) && (roulette.transform.localEulerAngles.y < space + 40*2+5))
                     {
                         centros[3].SetActive(true);
                         image = m_Sprite[3];
                         premio = m_premios[3];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 2) && (roulette.transform.localEulerAngles.y < space + 40 * 3))
+                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 2+5) && (roulette.transform.localEulerAngles.y < space + 40 * 3))
                     {
 
                         centros[4].SetActive(true);
@@ -174,19 +174,19 @@ namespace Sample
                         image = m_Sprite[5];
                         premio = m_premios[5];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 4) && (roulette.transform.localEulerAngles.y < space + 40 * 5))
+                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 4) && (roulette.transform.localEulerAngles.y < space + 40 * 5+5))
                     {
                         centros[6].SetActive(true);
                         image = m_Sprite[6];
                         premio = m_premios[6];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 5) && (roulette.transform.localEulerAngles.y < space + 40 * 6))
+                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 5+5) && (roulette.transform.localEulerAngles.y < space + 40 * 6-5))
                     {
                         centros[7].SetActive(true);
                         image = m_Sprite[7];
                         premio = m_premios[7];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 6) && (roulette.transform.localEulerAngles.y < space + 40 * 7))
+                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 6-5) && (roulette.transform.localEulerAngles.y < space + 40 * 7))
                     {
                         centros[8].SetActive(true);
                         image = m_Sprite[8];
@@ -197,6 +197,12 @@ namespace Sample
                         centros[9].SetActive(true);
                         image = m_Sprite[9];
                         premio = m_premios[9];
+                    }
+                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 8+5) && (roulette.transform.localEulerAngles.y <= 360))
+                    {
+                        centros[1].SetActive(true);
+                        image = m_Sprite[1];
+                        premio = m_premios[1];
                     }
                     messageImage.GetComponent<Image>().overrideSprite = image;
                     activityImage.GetComponent<Image>().overrideSprite = premio;
