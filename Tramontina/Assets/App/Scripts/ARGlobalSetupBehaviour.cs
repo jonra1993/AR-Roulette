@@ -41,8 +41,8 @@ namespace Sample
         public Button playButton;
         public float timeActiveOnTargetLose = .1f;
         float timeRotation = 5f;
-        float timeRotationmax = 10f;
-        float timeRotationmin = 7f;
+        float timeRotationmax = 10.1f;
+        float timeRotationmin = 5.5f;
 
         bool detected = false;
         float timer = 0;
@@ -140,65 +140,65 @@ namespace Sample
                     {
                         centro.SetActive(false);
                     }
+                    float[] ang = { 0, 20, 65, 109, 140, 186, 226, 257.6f, 303.48f, 346.5f, 360 };
+                    //print(roulette.transform.localEulerAngles.y);
 
-                    int space = 20;
-
-                    if ((roulette.transform.localEulerAngles.y >= 0) && (roulette.transform.localEulerAngles.y < 0+space))
+                    if ((roulette.transform.localEulerAngles.y >= ang[0]) && (roulette.transform.localEulerAngles.y < ang[1]))
                     {
                         centros[1].SetActive(true);
                         image = m_Sprite[1];
                         premio = m_premios[1];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= space) && (roulette.transform.localEulerAngles.y < space+40))
+                    if ((roulette.transform.localEulerAngles.y >= ang[1]) && (roulette.transform.localEulerAngles.y < ang[2]))
                     {
                         centros[2].SetActive(true);
                         image = m_Sprite[2];
                         premio = m_premios[2];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= space + 40) && (roulette.transform.localEulerAngles.y < space + 40*2+5))
+                    if ((roulette.transform.localEulerAngles.y >= ang[2]) && (roulette.transform.localEulerAngles.y < ang[3]))
                     {
                         centros[3].SetActive(true);
                         image = m_Sprite[3];
                         premio = m_premios[3];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 2+5) && (roulette.transform.localEulerAngles.y < space + 40 * 3))
+                    if ((roulette.transform.localEulerAngles.y >= ang[3]) && (roulette.transform.localEulerAngles.y < ang[4]))
                     {
 
                         centros[4].SetActive(true);
                         image = m_Sprite[4];
                         premio = m_premios[4];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 3) && (roulette.transform.localEulerAngles.y < space + 40 * 4))
+                    if ((roulette.transform.localEulerAngles.y >= ang[4]) && (roulette.transform.localEulerAngles.y < ang[5]))
                     {
                         centros[5].SetActive(true);
                         image = m_Sprite[5];
                         premio = m_premios[5];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 4) && (roulette.transform.localEulerAngles.y < space + 40 * 5+5))
+                    if ((roulette.transform.localEulerAngles.y >= ang[5]) && (roulette.transform.localEulerAngles.y < ang[6]))
                     {
                         centros[6].SetActive(true);
                         image = m_Sprite[6];
                         premio = m_premios[6];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 5+5) && (roulette.transform.localEulerAngles.y < space + 40 * 6-5))
+                    if ((roulette.transform.localEulerAngles.y >= ang[6]) && (roulette.transform.localEulerAngles.y < ang[7]))
                     {
                         centros[7].SetActive(true);
                         image = m_Sprite[7];
                         premio = m_premios[7];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 6-5) && (roulette.transform.localEulerAngles.y < space + 40 * 7))
+                    if ((roulette.transform.localEulerAngles.y >= ang[7]) && (roulette.transform.localEulerAngles.y < ang[8]))
                     {
                         centros[8].SetActive(true);
                         image = m_Sprite[8];
                         premio = m_premios[8];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 7) && (roulette.transform.localEulerAngles.y < space + 40 * 8))
+                    if ((roulette.transform.localEulerAngles.y >= ang[8]) && (roulette.transform.localEulerAngles.y < ang[9]))
                     {
                         centros[9].SetActive(true);
                         image = m_Sprite[9];
                         premio = m_premios[9];
                     }
-                    if ((roulette.transform.localEulerAngles.y >= space + 40 * 8+5) && (roulette.transform.localEulerAngles.y <= 360))
+                    if ((roulette.transform.localEulerAngles.y >= ang[9]) && (roulette.transform.localEulerAngles.y <= ang[10]))
                     {
                         centros[1].SetActive(true);
                         image = m_Sprite[1];
@@ -221,6 +221,10 @@ namespace Sample
                 messageImage.GetComponent<Image>().overrideSprite = m_Sprite[0];
                 activityImage.GetComponent<Image>().overrideSprite = m_premios[0];
 
+                foreach (GameObject centro in centros)
+                {
+                    centro.SetActive(false);
+                }
                 centros[0].SetActive(true);
                 rouletteSound.volume = 1f;
                 rouletteSound.Stop();
@@ -229,7 +233,6 @@ namespace Sample
                 rotate = true;
                 turnSpeed = turnSpeedRef;
                 timeRotation = UnityEngine.Random.Range(timeRotationmin, timeRotationmax);
-
                 //Debug.Log("Last Angle: " + roulette.transform.localEulerAngles.y);
             }
         }
