@@ -39,6 +39,8 @@ namespace Sample
         public AudioSource rouletteSound;
         public AudioSource winSound;
         public Button playButton;
+        public Button clearButton;
+        public GameObject clearObject;
         public float timeActiveOnTargetLose = .1f;
         float timeRotation = 5f;
         float timeRotationmax = 10.1f;
@@ -47,7 +49,7 @@ namespace Sample
         bool detected = false;
         float timer = 0;
         float timer2 = 0;
-        float turnSpeedRef = 500;
+        float turnSpeedRef = 1000;
         float turnSpeed = 0;
         bool rotate=false;
         bool seeActivityImage = false;
@@ -71,15 +73,18 @@ namespace Sample
 #if UNITY_EDITOR
                 UnityEditor.EditorUtility.DisplayDialog(title, keyMessage, "OK");
 #endif
-                Debug.LogError(title + " " + keyMessage);
+                //Debug.LogError(title + " " + keyMessage);
             }
         }
 
         void Start()
         {
+            centros[0].SetActive(true);
             messageImage.SetActive(true);
             activityImage.SetActive(false);
             playButton.onClick.AddListener(Rot);
+            clearButton.onClick.AddListener(Rot);
+            clearObject.SetActive(false);
         }
 
         // Update is called once per frame
@@ -89,6 +94,7 @@ namespace Sample
             {
                 timer = 0f;
                 activityImage.SetActive(false);
+                clearObject.SetActive(false);
             }
             else
             {
@@ -103,6 +109,7 @@ namespace Sample
                     ContainerTarget.transform.SetParent(Target.transform);
                     if (seeActivityImage == true)
                     {
+                        clearObject.SetActive(true);
                         activityImage.SetActive(true);
                     }
                 }
@@ -119,6 +126,7 @@ namespace Sample
                     timer2 += Time.deltaTime;
                     //Debug.Log("Delta Time: " + Time.deltaTime + "Angle: "+ roulette.transform.localEulerAngles.y);
                     //turnSpeed = turnSpeed - 1;
+                    //turnSpeed = turnSpeedRef * Mathf.Exp(-(timer2 / (timeRotation / 5)));
                     turnSpeed = turnSpeedRef*(1 - (1 / timeRotation) * timer2);
                     float atenuation= Mathf.Exp(-(timer2/(timeRotation/5)));
                     if (atenuation < 0) atenuation = 0;
@@ -133,6 +141,7 @@ namespace Sample
                 else
                 {
                     rotate = false;
+                    clearObject.SetActive(true);
                     rouletteSound.Stop();
                     winSound.Play();
 
@@ -141,6 +150,7 @@ namespace Sample
                         centro.SetActive(false);
                     }
                     float[] ang = { 0, 20, 65, 109, 140, 186, 226, 257.6f, 303.48f, 346.5f, 360 };
+                    centros[0].SetActive(true);
                     //print(roulette.transform.localEulerAngles.y);
 
                     if ((roulette.transform.localEulerAngles.y >= ang[0]) && (roulette.transform.localEulerAngles.y < ang[1]))
@@ -234,7 +244,22 @@ namespace Sample
                 turnSpeed = turnSpeedRef;
                 timeRotation = UnityEngine.Random.Range(timeRotationmin, timeRotationmax);
                 //Debug.Log("Last Angle: " + roulette.transform.localEulerAngles.y);
+                clearObject.SetActive(false);
             }
+            else if(Target.activeSelf == false && rotate == false)
+            {
+                
+                messageImage.GetComponent<Image>().overrideSprite = m_Sprite[0];
+                activityImage.GetComponent<Image>().overrideSprite = m_premios[0];
+                foreach (GameObject centro in centros)
+                {
+                    centro.SetActive(false);
+                }
+                centros[0].SetActive(true);
+                clearObject.SetActive(false);
+            }
+
+            seeActivityImage = false;
         }
 
         void Rotate(GameObject component, float angle)

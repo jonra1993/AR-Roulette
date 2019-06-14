@@ -8,6 +8,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
 //https://www.youtube.com/watch?v=iCEQdP1TdwM  unity analitics
 
@@ -23,8 +24,12 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        AnalyticsEvent.GameStart();
         id = PlayerPrefs.GetString("ID", "");
-        Debug.Log(id);
+        //Debug.Log(id);
+        AnalyticsResult result = Analytics.CustomEvent("Test");
+        // This should print "Ok" if the event was sent correctly.
+        //Debug.Log(result);
     }
 
     private void Update()
@@ -32,13 +37,13 @@ public class GameManager : MonoBehaviour {
         //SceneManager.GetActiveScene().name == "argumented"
         if (SceneManager.GetActiveScene().buildIndex==2 && mem==false)
         {
-            Debug.Log("nuevo Usuario?");
+            //Debug.Log("nuevo Usuario?");
             if (id == "")
             {
                 string guid = System.Guid.NewGuid().ToString();
                 PlayerPrefs.SetString("ID", guid);
                 id = guid;
-                Debug.Log("si es nuevo");
+                //Debug.Log("si es nuevo");
                 Invoke("Function", 1.0f); //invoca el evento luego de 1 segundos
             }
             mem = true;
@@ -48,7 +53,7 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape) && !clickedBefore)
         {
             textMessage = "Presione nuevamente para salir..";
-            //Debug.Log("Back Button pressed for the first time");
+            ////Debug.Log("Back Button pressed for the first time");
             //Set to false so that this input is not checked again. It will be checked in the coroutine function instead
             clickedBefore = true;
 
@@ -106,7 +111,7 @@ public class GameManager : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 //textMessage = "Back Button pressed for the second time. EXITING.....";
-                //Debug.Log("Back Button pressed for the second time. EXITING.....");
+                ////Debug.Log("Back Button pressed for the second time. EXITING.....");
                 Quit();
             }
 
@@ -114,7 +119,7 @@ public class GameManager : MonoBehaviour {
             yield return null;
         }
 
-        //Debug.Log("Timer finished...Back Button was NOT pressed for the second time within: '" + timerTime + "' seconds");
+        ////Debug.Log("Timer finished...Back Button was NOT pressed for the second time within: '" + timerTime + "' seconds");
 
         //Timer has finished and NO QUIT(NO second press) so deactivate
         show = false;
